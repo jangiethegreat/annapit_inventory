@@ -20,38 +20,38 @@
             </tr>
         </thead>
         <tbody>
-        @forelse ($acceptedTickets as $acceptedTicket)
-            <tr>
-                <td>{{ $acceptedTicket->requestor_name }}</td>
-                <td>{{ $acceptedTicket->unit_no }}</td>
-                <td>{{ $acceptedTicket->items_requested }}</td>
-                <td>{{ $acceptedTicket->quantity }}</td>
-                <td>{{ $acceptedTicket->status }}</td>
-                <td>{{ $acceptedTicket->remarks }}</td>
-                <td>
-                    @if ($acceptedTicket->status !== 'Accepted')
-                        <form action="{{ route('accepted_tickets.update', $acceptedTicket->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <!-- Add the necessary form fields here -->
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </form>
-                    @endif
-                </td>
-                <td>
-                    @if ($acceptedTicket->status === 'Accepted')
-                        <form action="{{ route('stocks.deploy') }}" method="POST">
-                            @csrf
-                            <button class="btn btn-primary">Deploy</button>
-                        </form>
-                    @endif
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="7">No accepted requests found.</td>
-            </tr>
-        @endforelse
+            @forelse ($acceptedTickets as $acceptedTicket)
+                <tr>
+                    <td>{{ $acceptedTicket->requestor_name }}</td>
+                    <td>{{ $acceptedTicket->unit_no }}</td>
+                    <td>{{ $acceptedTicket->items_requested }}</td>
+                    <td>{{ $acceptedTicket->quantity }}</td>
+                    <td>{{ $acceptedTicket->status }}</td>
+                    <td>{{ $acceptedTicket->remarks }}</td>
+                    <td>
+                        @if ($acceptedTicket->status !== 'Accepted')
+                            <form action="{{ route('accepted_tickets.update', $acceptedTicket->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <!-- Add the necessary form fields here -->
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($acceptedTicket->status === 'Accepted')
+                            <form action="{{ route('stocks.deploy') }}" method="POST">
+                                @csrf
+                                <button class="btn btn-primary">Deploy</button>
+                            </form>
+                        @endif
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7">No accepted requests found.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 @endsection

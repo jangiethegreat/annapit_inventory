@@ -53,7 +53,9 @@ ADMIN
 # item requested(dropdown of category)
 # remarks
 # status(pending/completed)
-Action:Deploy(will only show if the status is completed)
+# Action:Deploy(will only show if the status is completed)
+
+note: still cant display stocks on deploy 
 
 
 Deploy Button Logic

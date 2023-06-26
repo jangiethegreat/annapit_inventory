@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use  App\Models\RequestTicket;
-use  App\Models\AcceptedTicket;
+
+use App\Models\RequestTicket;
+use App\Models\AcceptedTicket;
+
 
 use Illuminate\Http\Request;
 
@@ -69,7 +71,7 @@ class AcceptedTicketController extends Controller
         $acceptedTicket->update([
             'status' => 'Accepted',
         ]);
-    
+
         return redirect()->route('accepted_tickets.index')->with('success', 'Accepted request status updated.');
     }
 

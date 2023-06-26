@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label for="unit_no">Unit No:</label>
-            <input type="text" name="unit_no" id="unit_no" class="form-control" value="{{ $requestTicket->unit_no }}"required>
+            <input type="text" name="unit_no" id="unit_no" class="form-control" value="{{ $requestTicket->unit_no }}" required>
         </div>
 
         <div class="form-group">

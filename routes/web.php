@@ -29,9 +29,12 @@ Route::get('/request_tickets/{id}/create_rejected', [RejectedTicketController::c
 Route::get('/rejected_tickets', [RejectedTicketController::class, 'index'])->name('rejected_tickets.index');
 
 // Route::get('/accepted_requests', [AcceptedRequestController::class, 'index'])->name('accepted_requests.index');
-// Route::get('/accepted_requests/create/{id}', [AcceptedRequestController::class, 'create'])->name('accepted_requests.create');
-Route::put('/accepted_tickets/{id}', [AcceptedTicketController::class, 'update'])->name('accepted_tickets.update');
+// Route::get('/accepted_requests/create/{id}', [AcceptedTicketController::class, 'create'])->name('accepted_requests.create');
+// Route::put('/accepted_requests', [AcceptedTicketController::class, 'update'])->name('accepted_requests.update');
 
 Route::resource('accepted_tickets', AcceptedTicketController::class);
+
+Route::get('/request_tickets/{id}/create_accepted', [AcceptedTicketController::class, 'create'])->name('accepted_tickets.create');
+
 
 Route::post('/stocks/deploy', [StockController::class, 'deploy'])->name('stocks.deploy');
