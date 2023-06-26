@@ -1,0 +1,71 @@
+# *create new laravel project
+# #create user
+# -admin/it
+# name
+# email
+# password
+
+# -employee
+# name
+# email
+# password
+
+
+# #create a Category table
+# -add new category
+# ID
+# name
+
+# #create a Stocks Table
+# -add new stocks
+# dropdown for category/name
+# quantity
+# details
+
+
+
+# EMPLOYEE
+# #create request form(employee)
+# name of employee
+# Unit No/Floor
+# Items to be requested(Category Dropdown)
+# quantity
+
+
+ADMIN
+# #create request table (fetch from the employee request)|HOLDING TABLE FOR REQUEST
+# ID
+# Requestors Name
+# Items requested
+# Quantity
+# Action: Accept/Reject
+
+#create rejected table
+# ID
+# requestors name
+# items
+# remarks/reason
+
+
+# #create accepted table(fetch from request table)
+# ID
+# requestor name
+# item requested(dropdown of category)
+# remarks
+# status(pending/completed)
+Action:Deploy(will only show if the status is completed)
+
+
+Deploy Button Logic
+-show item base on category id on the request(stocks table)
+-Action: add to cart
+
+#create Cart Table(Holding Table)
+fetch the stocks details
+Action: Deploy/Checkout
+
+#create a deployed table
+ID
+Employee Name(Fetch from the request)||Receiver
+IT Name || Deployer
+Action:Download PDF per ID, Download daily Reports

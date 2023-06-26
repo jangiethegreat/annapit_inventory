@@ -10,27 +10,26 @@
     @endif
 
     <table class="table">
-        <thead>
-            <tr>
-                <th>Requestor's Name</th>
-                <th>Items Requested</th>
-                <th>Quantity</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+    <thead>
+    <tr>
+        <th>Requestor's Name</th>
+        <th>Unit No</th>
+        <th>Items Requested</th>
+        <th>Quantity</th>
+        <th>Action</th>
+    </tr>
+</thead>
         <tbody>
             @forelse ($request_tickets as $request_ticket)
                 <tr>
                     <td>{{ $request_ticket->requestor_name }}</td>
+                    <td>{{ $request_ticket->unit_no }}</td>
                     <td>{{ $request_ticket->items_requested }}</td>
                     <td>{{ $request_ticket->quantity }}</td>
                     <td>
-                        <a href="{{ route('request_tickets.edit', $request_ticket->id) }}" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('request_tickets.destroy', $request_ticket->id) }}" method="POST" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this request ticket?')">Delete</button>
-                        </form>
+                    <a href="{{ route('accepted_tickets.create', $request_ticket->id) }}" class="btn btn-success">Accept</a> 
+                    <a href="{{ route('rejected_tickets.create', $request_ticket->id) }}" class="btn btn-danger">Reject</a> 
+                        
                     </td>
                 </tr>
             @empty

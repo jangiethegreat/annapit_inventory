@@ -75,4 +75,13 @@ class StockController extends Controller
 
         return redirect()->route('stocks.index')->with('success', 'Stock deleted successfully.');
     }
+    public function deploy(Request $request)
+    {
+        $itemsRequested = $request->input('items_requested');
+
+        // Retrieve the corresponding stocks based on the items requested
+        $stocks = Stock::whereIn('category', explode(',', $itemsRequested))->get();
+
+        return view('stocks.deploy', compact('stocks'));
+    }
 }

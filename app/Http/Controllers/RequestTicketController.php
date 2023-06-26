@@ -21,29 +21,40 @@ class RequestTicketController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'requestor_name' => 'required',
-            ' ' => 'required',
-            'quantity' => 'required|numeric',
-        ]);
+{
+    $validatedData = $request->validate([
+        'requestor_name' => 'required',
+        'unit_no' => 'required',
+        'items_requested' => 'required|array',
+        'quantity' => 'required|array',
+    ]);
 
-        // Retrieve the selected category ID from the request
-        $categoryId = $validatedData['category'];
+    // Retrieve the selected category IDs and quantities from the request
+    $categoryIds = $validatedData['items_requested'];
+    $quantities = $validatedData['quantity'];
 
-        // Retrieve the category name associated with the selected category ID
-        $category = Category::findOrFail($categoryId);
-        $categoryName = $category->name;
+    // Retrieve the category names associated with the selected category IDs
+    $categories = Category::whereIn('id', $categoryIds)->pluck('name')->toArray();
 
-        // Create the request ticket with the selected category name
-        $requestTicket = new RequestTicket();
-        $requestTicket->requestor_name = $validatedData['requestor_name'];
-        $requestTicket->items_requested = $categoryName;
-        $requestTicket->quantity = $validatedData['quantity'];
-        $requestTicket->save();
+    // Combine the categories and quantities into concatenated strings
+    $itemsRequested = implode(', ', $categories);
+    $quantitiesString = implode(', ', $quantities);
 
-        return redirect()->route('request_tickets.index')->with('success', 'Request ticket created successfully.');
-    }
+    // Create the request ticket with the concatenated items requested, quantities, and unit number
+    $requestTicket = new RequestTicket();
+    $requestTicket->requestor_name = $validatedData['requestor_name'];
+    $requestTicket->unit_no = $validatedData['unit_no'];
+    $requestTicket->items_requested = $itemsRequested;
+    $requestTicket->quantity = $quantitiesString;
+    $requestTicket->save();
+
+    return redirect()->route('request_tickets.index')->with('success', 'Request ticket created successfully.');
+}
+
+
+
+    
+
 
     public function edit(RequestTicket $requestTicket)
     {

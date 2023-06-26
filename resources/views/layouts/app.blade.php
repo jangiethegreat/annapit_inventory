@@ -24,6 +24,15 @@
                         <a class="nav-link" href="{{ route('stocks.index') }}">Stocks</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('request_tickets.index') }}">Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('rejected_tickets.index') }}">Rejected Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('accepted_tickets.index') }}">Accepted Tickets</a>
+                    </li>
                 </ul>
             </div>
         </div>

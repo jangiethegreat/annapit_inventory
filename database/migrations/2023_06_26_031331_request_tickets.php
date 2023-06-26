@@ -13,8 +13,9 @@ return new class extends Migration {
         Schema::create('request_tickets', function (Blueprint $table) {
             $table->id();
             $table->string('requestor_name');
+            $table->string('unit_no');
             $table->string('items_requested');
-            $table->integer('quantity');
+            $table->string('quantity');
         });
     }
 
