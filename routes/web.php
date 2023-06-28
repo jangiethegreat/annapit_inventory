@@ -38,3 +38,4 @@ Route::get('/request_tickets/{id}/create_accepted', [AcceptedTicketController::c
 
 Route::get('/accepted_tickets/{id}/deploy', [AcceptedTicketController::class, 'deploy'])->name('accepted_tickets.deploy');
 Route::post('stocks/{id}/addtocart', [StockController::class, 'addtocart'])->name('stocks.addtocart');
+Route::get('/cart', [StockController::class, 'cart'])->name('cart.index');

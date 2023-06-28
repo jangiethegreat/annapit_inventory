@@ -18,7 +18,7 @@
                             <td>{{ $cartItem->stock->category }}</td>
                             <td>{{ $cartItem->quantity }}</td>
                             <td>
-                                <form action="{{ route('cart.remove', $cartItem->id) }}" method="POST" style="display: inline-block;">
+                            
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Remove</button>
                                 </form>
@@ -27,7 +27,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <form action="{{ route('cart.clear') }}" method="POST">
+           
                 @csrf
                 <button type="submit" class="btn btn-warning">Clear Cart</button>
             </form>

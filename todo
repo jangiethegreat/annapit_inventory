@@ -32,7 +32,7 @@
 # quantity
 
 
-ADMIN
+# ADMIN
 # #create request table (fetch from the employee request)|HOLDING TABLE FOR REQUEST
 # ID
 # Requestors Name
@@ -55,15 +55,15 @@ ADMIN
 # status(pending/completed)
 # Action:Deploy(will only show if the status is completed)
 
-note: still cant display stocks on deploy 
+# note: still cant display stocks on deploy 
 
 
-Deploy Button Logic
--show item base on category id on the request(stocks table)
--Action: add to cart
+# Deploy Button Logic
+# -show item base on category id on the request(stocks table)
+# -Action: add to cart
 
 #create Cart Table(Holding Table)
-fetch the stocks details
+# fetch the stocks details
 Action: Deploy/Checkout
 
 #create a deployed table

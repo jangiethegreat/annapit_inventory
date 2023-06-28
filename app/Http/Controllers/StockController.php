@@ -77,6 +77,12 @@ class StockController extends Controller
 
         return redirect()->route('stocks.index')->with('success', 'Stock deleted successfully.');
     }
+    public function cart()
+    {
+        $cartItems = Cart::with('stock')->get();
+
+        return view('stocks.cart', compact('cartItems'));
+    }
 
     public function addtocart(Request $request, $id)
     {
