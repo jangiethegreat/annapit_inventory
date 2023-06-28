@@ -39,13 +39,14 @@
                         @endif
                     </td>
                     <td>
-                        @if ($acceptedTicket->status === 'Accepted')
-                            <form action="{{ route('stocks.deploy') }}" method="POST">
-                                @csrf
-                                <button class="btn btn-primary">Deploy</button>
-                            </form>
-                        @endif
-                    </td>
+    @if ($acceptedTicket->status === 'Accepted')
+        <form action="{{ route('accepted_tickets.deploy', $acceptedTicket->id) }}" >
+            @csrf
+            <button class="btn btn-primary">Deploy</button>
+        </form>
+    @endif
+</td>
+
                 </tr>
             @empty
                 <tr>
@@ -54,4 +55,7 @@
             @endforelse
         </tbody>
     </table>
+
+
+    
 @endsection

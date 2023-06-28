@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Stock;
 use App\Models\Category;
+use App\Models\AcceptedTicket;
+use App\Models\Cart;
 
 use Illuminate\Http\Request;
 
@@ -75,13 +77,32 @@ class StockController extends Controller
 
         return redirect()->route('stocks.index')->with('success', 'Stock deleted successfully.');
     }
-    public function deploy(Request $request)
+
+    public function addtocart(Request $request, $id)
     {
-        $itemsRequested = $request->input('items_requested');
+        // Find the stock item to be added to the cart
+        $stock = Stock::findOrFail($id);
 
-        // Retrieve the corresponding stocks based on the items requested
-        $stocks = Stock::whereIn('category', explode(',', $itemsRequested))->get();
+        // Retrieve the quantity from the request
+        $quantity = $request->input('quantity');
 
-        return view('stocks.deploy', compact('stocks'));
+        // Ensure the requested quantity is available in the stock
+        if ($stock->quantity < $quantity) {
+            return redirect()->route('stocks.index')->with('error', 'Insufficient stock quantity.');
+        }
+
+        // Create a new cart item and associate it with the stock
+        $cartItem = new Cart();
+        $cartItem->stock_id = $stock->id;
+        $cartItem->quantity = $quantity;
+        $cartItem->save();
+
+        // Decrease the stock quantity
+        $stock->decrement('quantity', $quantity);
+
+        return redirect()->route('stocks.index')->with('success', 'Item added to cart successfully.');
     }
+
+
+
 }

@@ -36,5 +36,5 @@ Route::resource('accepted_tickets', AcceptedTicketController::class);
 
 Route::get('/request_tickets/{id}/create_accepted', [AcceptedTicketController::class, 'create'])->name('accepted_tickets.create');
 
-
-Route::post('/stocks/deploy', [StockController::class, 'deploy'])->name('stocks.deploy');
+Route::get('/accepted_tickets/{id}/deploy', [AcceptedTicketController::class, 'deploy'])->name('accepted_tickets.deploy');
+Route::post('stocks/{id}/addtocart', [StockController::class, 'addtocart'])->name('stocks.addtocart');

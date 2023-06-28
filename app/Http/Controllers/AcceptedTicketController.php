@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RequestTicket;
 use App\Models\AcceptedTicket;
+use App\Models\Stock;
 
 
 use Illuminate\Http\Request;
@@ -17,7 +18,11 @@ class AcceptedTicketController extends Controller
     {
         $acceptedTickets = AcceptedTicket::all();
 
-        return view('accepted_tickets.index', compact('acceptedTickets'));
+        $itemsRequested = $acceptedTickets->pluck('items_requested')->toArray();
+
+        $stocks = Stock::whereIn('category', $itemsRequested)->get();
+
+        return view('accepted_tickets.index', compact('acceptedTickets', 'stocks'));
     }
 
     public function create($id)
@@ -39,6 +44,7 @@ class AcceptedTicketController extends Controller
         ]);
 
         $validatedData['status'] = 'Pending';
+        $validatedData['item_requested'] = $validatedData['items_requested'];
 
         AcceptedTicket::create($validatedData);
 
@@ -70,6 +76,7 @@ class AcceptedTicketController extends Controller
         $acceptedTicket = AcceptedTicket::findOrFail($id);
         $acceptedTicket->update([
             'status' => 'Accepted',
+            'remarks' => 'Ready For Deployment'
         ]);
 
         return redirect()->route('accepted_tickets.index')->with('success', 'Accepted request status updated.');
@@ -82,4 +89,16 @@ class AcceptedTicketController extends Controller
     {
         //
     }
+    public function deploy($id)
+    {
+        $acceptedTicket = AcceptedTicket::findOrFail($id);
+
+        $itemsRequested = explode(', ', $acceptedTicket->items_requested);
+
+        $stocks = Stock::whereIn('category', $itemsRequested)->get();
+
+        return view('accepted_tickets.deploy', compact('acceptedTicket', 'stocks'));
+    }
+
+
 }
