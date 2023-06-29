@@ -6,6 +6,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\RequestTicketController;
 use App\Http\Controllers\RejectedTicketController;
 use App\Http\Controllers\AcceptedTicketController;
+use App\Http\Controllers\DeployedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,7 @@ Route::get('/request_tickets/{id}/create_accepted', [AcceptedTicketController::c
 Route::get('/accepted_tickets/{id}/deploy', [AcceptedTicketController::class, 'deploy'])->name('accepted_tickets.deploy');
 Route::post('stocks/{id}/addtocart', [StockController::class, 'addtocart'])->name('stocks.addtocart');
 Route::get('/cart', [StockController::class, 'cart'])->name('cart.index');
+Route::get('/cart/remove/{id}', [StockController::class, 'removeCartItem'])->name('cart.remove');
+Route::get('/cart/clear', [StockController::class, 'clearCart'])->name('cart.clear');
+
+Route::resource('deployeds', DeployedController::class);

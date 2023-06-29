@@ -64,10 +64,11 @@
 
 #create Cart Table(Holding Table)
 # fetch the stocks details
-Action: Deploy/Checkout
+# ||| not redirecting to stocks table issue
+# Action: Deploy/Checkout
 
 #create a deployed table
-ID
-Employee Name(Fetch from the request)||Receiver
-IT Name || Deployer
+# ID
+# Employee Name(Fetch from the request)||Receiver
+# IT Name || Deployer
 Action:Download PDF per ID, Download daily Reports

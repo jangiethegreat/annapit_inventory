@@ -32,6 +32,8 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('accepted_tickets.index') }}">Accepted Tickets</a>
+                    </li><li class="nav-item">
+                        <a class="nav-link" href="{{ route('cart.index') }}">Cart</a>
                     </li>
                 </ul>
             </div>

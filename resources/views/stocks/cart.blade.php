@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <h1>Cart</h1>
         @if (count($cartItems) > 0)
@@ -19,8 +20,8 @@
                             <td>{{ $cartItem->quantity }}</td>
                             <td>
                             
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Remove</button>
+                            <a href="{{ route('cart.remove', $cartItem->id) }}"><button type="submit" class="btn btn-danger">Remove</button></a>
+                                    
                                 </form>
                             </td>
                         </tr>
@@ -29,7 +30,8 @@
             </table>
            
                 @csrf
-                <button type="submit" class="btn btn-warning">Clear Cart</button>
+                <a href="{{ url('/cart/clear') }}"><button type="submit" class="btn btn-warning">Clear Cart</button></a>
+                <a href="#"><button type="submit" class="btn btn-success">Deploy</button></a>
             </form>
         @else
             <p>Your cart is empty.</p>

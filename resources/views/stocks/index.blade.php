@@ -25,7 +25,10 @@
                     <td>{{ $stock->quantity }}</td>
                     <td>{{ $stock->details }}</td>
                     <td>
-                        <a href="{{ route('stocks.show', $stock->id) }}" class="btn btn-primary">View</a>
+                <form action="{{ route('stocks.addtocart', $stock->id) }}" method="POST">
+                   
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+
                         <a href="{{ route('stocks.edit', $stock->id) }}" class="btn btn-secondary">Edit</a>
                         <form action="{{ route('stocks.destroy', $stock->id) }}" method="POST" style="display: inline-block;">
                             @csrf

@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             <label for="quantity">Quantity:</label>
-            <input type="number" name="quantity" id="quantity" class="form-control" value="{{ $stock->quantity }}" required>
+            <input type="number" name="quantity" id="quantity" class="form-control" value="" required>
         </div>
         <div class="form-group">
             <label for="details">Details:</label>

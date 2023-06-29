@@ -6,6 +6,7 @@ use App\Models\Stock;
 use App\Models\Category;
 use App\Models\AcceptedTicket;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Http\Request;
 
@@ -65,10 +66,25 @@ class StockController extends Controller
         ]);
 
         $stock = Stock::findOrFail($id);
+
+        // Retrieve the current quantity of the stock
+        $currentQuantity = $stock->quantity;
+
+        // If the quantity field is empty in the request, set it to the current quantity
+        $validatedData['quantity'] = $validatedData['quantity'] ?? $currentQuantity;
+
+        // Add the quantity from the request to the existing quantity
+        $existingQuantity = $stock->quantity;
+        $newQuantity = $existingQuantity + $request->input('quantity', 0);
+        $validatedData['quantity'] = $newQuantity;
+
         $stock->update($validatedData);
 
         return redirect()->route('stocks.index')->with('success', 'Stock updated successfully.');
     }
+
+
+
 
     public function destroy($id)
     {
@@ -94,20 +110,60 @@ class StockController extends Controller
 
         // Ensure the requested quantity is available in the stock
         if ($stock->quantity < $quantity) {
-            return redirect()->route('stocks.index')->with('error', 'Insufficient stock quantity.');
+            return Redirect::back()->with('error', 'Insufficient stock quantity.');
         }
 
-        // Create a new cart item and associate it with the stock
-        $cartItem = new Cart();
-        $cartItem->stock_id = $stock->id;
-        $cartItem->quantity = $quantity;
-        $cartItem->save();
+        // Check if the cart already contains an item with the same stock ID
+        $existingCartItem = Cart::where('stock_id', $stock->id)->first();
+
+        if ($existingCartItem) {
+            // Increment the quantity of the existing cart item
+            $existingCartItem->increment('quantity', $quantity);
+        } else {
+            // Create a new cart item and associate it with the stock
+            $cartItem = new Cart();
+            $cartItem->stock_id = $stock->id;
+            $cartItem->quantity = $quantity;
+            $cartItem->save();
+        }
 
         // Decrease the stock quantity
         $stock->decrement('quantity', $quantity);
 
-        return redirect()->route('stocks.index')->with('success', 'Item added to cart successfully.');
+        return Redirect::back()->with('success', 'Item added to cart successfully.');
     }
+    public function removeCartItem($id)
+    {
+        $cartItem = Cart::findOrFail($id);
+        $stock = Stock::findOrFail($cartItem->stock_id);
+
+        // Increase the stock quantity
+        $stock->increment('quantity', $cartItem->quantity);
+
+        // Delete the cart item
+        $cartItem->delete();
+
+        return Redirect::back()->with('success', 'Item removed from cart successfully.');
+    }
+
+    public function clearCart()
+    {
+        $cartItems = Cart::all();
+
+        foreach ($cartItems as $cartItem) {
+            $stock = Stock::findOrFail($cartItem->stock_id);
+
+            // Increase the stock quantity
+            $stock->increment('quantity', $cartItem->quantity);
+        }
+
+        Cart::truncate();
+
+        return Redirect::back()->with('success', 'Cart cleared successfully. Quantity returned to stock.');
+    }
+
+
+
 
 
 

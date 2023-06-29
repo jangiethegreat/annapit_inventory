@@ -39,13 +39,13 @@
                         @endif
                     </td>
                     <td>
-    @if ($acceptedTicket->status === 'Accepted')
-        <form action="{{ route('accepted_tickets.deploy', $acceptedTicket->id) }}" >
-            @csrf
-            <button class="btn btn-primary">Deploy</button>
-        </form>
-    @endif
-</td>
+                        @if ($acceptedTicket->status === 'Accepted')
+                            <form action="{{ route('accepted_tickets.deploy', $acceptedTicket->id) }}" >
+                                 @csrf
+                                    <button class="btn btn-primary">View Stocks</button>
+                            </form>
+                        @endif
+                    </td>
 
                 </tr>
             @empty
