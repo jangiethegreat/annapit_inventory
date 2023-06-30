@@ -6,6 +6,8 @@ use App\Models\Deployed;
 use App\Models\AcceptedTicket;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class DeployedController extends Controller
 {
