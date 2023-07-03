@@ -5,34 +5,35 @@
     <div class="container">
         <h1>Cart</h1>
         @if (count($cartItems) > 0)
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($cartItems as $cartItem)
-                        <tr>
-                            <td>{{ $cartItem->stock->category }}</td>
-                            <td>{{ $cartItem->quantity }}</td>
-                            <td>
-                            
-                            <a href="{{ route('cart.remove', $cartItem->id) }}"><button type="submit" class="btn btn-danger">Remove</button></a>
-                                    
+            <div class="row">
+                @foreach ($cartItems as $cartItem)
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $cartItem->stock->category }}</h5>
+                                <p class="card-text">
+                                    Quantity: {{ $cartItem->quantity }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <form action="{{ route('cart.remove', $cartItem->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Remove</button>
                                 </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-           
-                @csrf
-                <a href="{{ url('/cart/clear') }}"><button type="submit" class="btn btn-warning">Clear Cart</button></a>
-                <a href="#"><button type="submit" class="btn btn-success">Deploy</button></a>
-            </form>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="{{ url('/cart/clear') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-warning">Clear Cart</button>
+                        <a href="#" class="btn btn-success">Deploy</a>
+                    </form>
+                </div>
+            </div>
         @else
             <p>Your cart is empty.</p>
         @endif

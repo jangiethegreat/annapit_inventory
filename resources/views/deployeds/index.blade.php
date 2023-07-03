@@ -6,33 +6,30 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    <a href="{{ route('deployedItems.downloadReports') }}" class="btn btn-primary">Download Reports</a> 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Requested By</th>
-                <th>Unit No</th>
-                <th>Item Requested</th>
-                <th>Quantity</th>
-                <th>Deployed By</th>
-                <th>Date</th>
-                <th>Action</th> <!-- Add this column for the PDF download button -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($deployeds as $deployed)
-                <tr>
-                    <td>{{ $deployed->requested_by }}</td>
-                    <td>{{ $deployed->unit_no }}</td>
-                    <td>{{ $deployed->item_requested }}</td>
-                    <td>{{ $deployed->quantity }}</td>
-                    <td>{{ $deployed->deployed_by }}</td>
-                    <td>{{ $deployed->date }}</td>
-                    <td>
-                        <a href="{{ route('deployeds.downloadPdf', ['id' => $deployed->id]) }}" class="btn btn-primary">Download PDF</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+
+    <div class="report-section" style="padding: 20px;">
+        <a href="{{ route('deployedItems.downloadReports') }}" class="btn btn-outline-primary">Download Daily Reports</a> 
+    </div>
+
+    <div class="row">
+        @foreach ($deployeds as $deployed)
+            <div class="col-md-4 mb-4">
+                <div class="card border-success mb-3">
+                    <div class="card-header bg-transparent border-success"><strong>Unit No:</strong>{{ $deployed->unit_no }}</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $deployed->item_requested }}</h5>
+                        <p class="card-text">
+                            <strong>Requested By:</strong> {{ $deployed->requested_by }}<br>
+                            <strong>Quantity:</strong> {{ $deployed->quantity }}<br>
+                            <strong>Deployed By:</strong> {{ $deployed->deployed_by }}<br>
+                            <strong>Date:</strong> {{ $deployed->date }}
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">
+                        <a href="{{ route('deployeds.downloadPdf', ['id' => $deployed->id]) }}" class="btn btn-warning">Download PDF</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @endsection
