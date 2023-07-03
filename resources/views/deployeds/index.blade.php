@@ -6,7 +6,7 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    <a href="{{ route('deployedItems.downloadReports') }}" class="btn btn-primary">Download Reports</a>
+    <a href="{{ route('deployedItems.downloadReports') }}" class="btn btn-primary">Download Reports</a> 
     <table class="table">
         <thead>
             <tr>

@@ -39,7 +39,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4">No stocks found.</td>
+                    <td colspan="3">No stocks found.</td>
                 </tr>
             @endforelse
         </tbody>
