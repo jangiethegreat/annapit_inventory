@@ -44,3 +44,5 @@ Route::get('/cart/remove/{id}', [StockController::class, 'removeCartItem'])->nam
 Route::get('/cart/clear', [StockController::class, 'clearCart'])->name('cart.clear');
 
 Route::resource('deployeds', DeployedController::class);
+Route::get('/deployeds/{id}/download-pdf', [DeployedController::class, 'downloadPdf'])->name('deployeds.downloadPdf');
+Route::get('/deployed-items/download-reports', [DeployedController::class, 'downloadReports'])->name('deployedItems.downloadReports');

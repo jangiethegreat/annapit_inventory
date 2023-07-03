@@ -6,7 +6,7 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-
+    <a href="{{ route('deployedItems.downloadReports') }}" class="btn btn-primary">Download Reports</a>
     <table class="table">
         <thead>
             <tr>
@@ -16,6 +16,7 @@
                 <th>Quantity</th>
                 <th>Deployed By</th>
                 <th>Date</th>
+                <th>Action</th> <!-- Add this column for the PDF download button -->
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,9 @@
                     <td>{{ $deployed->quantity }}</td>
                     <td>{{ $deployed->deployed_by }}</td>
                     <td>{{ $deployed->date }}</td>
+                    <td>
+                        <a href="{{ route('deployeds.downloadPdf', ['id' => $deployed->id]) }}" class="btn btn-primary">Download PDF</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
