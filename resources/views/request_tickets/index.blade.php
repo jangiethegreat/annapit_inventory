@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-
+@section('content')
     <h1>Request Tickets</h1>
 
     <a href="{{ route('request_tickets.create') }}" class="btn btn-primary mb-3">Create Request Ticket</a>

@@ -128,70 +128,73 @@ class DeployedController extends Controller
 
         // Generate the HTML table for the report
         $html = '
-    <html>
-        <head>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                }
-                h1 {
-                    text-align: center;
-                    margin-bottom: 20px;
-                }
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
-                th, td {
-                    padding: 10px;
-                    text-align: left;
-                    border-bottom: 1px solid #ddd;
-                }
-                th {
-                    background-color: #f5f5f5;
-                }
-                .logo-container {
-                    text-align: center;
-                    align-items: center;
-                    margin-bottom: 20px;
-                }
-                .logo-container img {
-                    width: 450px;
-                    height: 120px;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="logo-container">
-                <img src="' . 'data:image/' . $defaultImageType . ';base64,' . base64_encode($defaultImageData) . '" alt="image">
-            </div>
-            <h1>Deployed Items Report ' . $today->format('Y-m-d') . '</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Requested By</th>
-                        <th>Deployed By</th>
-                        <th>Item Details</th>
-                        <th>quantity</th>
-                    </tr>
-                </thead>
-                <tbody>';
+        <html>
+            <head>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                    }
+                    h1 {
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        padding: 10px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                        border: 1px solid #ddd; /* Add border property */
+                    }
+                    th {
+                        background-color: #f5f5f5;
+                    }
+                    .logo-container {
+                        text-align: center;
+                        align-items: center;
+                        margin-bottom: 20px;
+                    }
+                    .logo-container img {
+                        width: 450px;
+                        height: 120px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="logo-container">
+                    <img src="' . 'data:image/' . $defaultImageType . ';base64,' . base64_encode($defaultImageData) . '" alt="image">
+                </div>
+                <h1>Deployed Items Report ' . $today->format('Y-m-d') . '</h1>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Requested By</th>
+                            <th>Unit No</th>
+                            <th>Deployed By</th>
+                            <th>Item Details</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
 
-        foreach ($deployeds as $deployeds) {
+        foreach ($deployeds as $deployed) {
             $html .= '
-        <tr>
-            <td>' . $deployeds->requested_by . '</td>
-            <td>' . $deployeds->deployed_by . '</td>
-            <td>' . $deployeds->item_requested . '</td>
-            <td>' . $deployeds->quantity . '</td>
-        </tr>';
+            <tr>
+                <td>' . $deployed->requested_by . '</td>
+                <td>' . $deployed->unit_no . '</td>
+                <td>' . $deployed->deployed_by . '</td>
+                <td>' . $deployed->item_requested . '</td>
+                <td>' . $deployed->quantity . '</td>
+            </tr>';
         }
 
         $html .= '
-                </tbody>
-            </table>
-        </body>
-    </html>';
+                    </tbody>
+                </table>
+            </body>
+        </html>';
 
         // Configure PDF options
         $options = new Options();
