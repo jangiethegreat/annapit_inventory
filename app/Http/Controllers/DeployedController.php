@@ -172,6 +172,7 @@ class DeployedController extends Controller
                         <th>Requested By</th>
                         <th>Deployed By</th>
                         <th>Item Details</th>
+                        <th>quantity</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -182,6 +183,7 @@ class DeployedController extends Controller
             <td>' . $deployeds->requested_by . '</td>
             <td>' . $deployeds->deployed_by . '</td>
             <td>' . $deployeds->item_requested . '</td>
+            <td>' . $deployeds->quantity . '</td>
         </tr>';
         }
 
