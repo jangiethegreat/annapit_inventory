@@ -15,11 +15,11 @@
         @foreach ($deployeds as $deployed)
             <div class="col-md-4 mb-4">
                 <div class="card border-success mb-3">
-                    <div class="card-header bg-transparent border-success"><strong>Unit No:</strong>{{ $deployed->unit_no }}</div>
+                    <div class="card-header bg-transparent border-success"><strong>Requested By:</strong> {{ $deployed->requested_by }}</div>
                     <div class="card-body">
                         <h5 class="card-title">{{ $deployed->item_requested }}</h5>
                         <p class="card-text">
-                            <strong>Requested By:</strong> {{ $deployed->requested_by }}<br>
+                            <strong>Unit No:</strong>{{ $deployed->unit_no }}<br>
                             <strong>Quantity:</strong> {{ $deployed->quantity }}<br>
                             <strong>Deployed By:</strong> {{ $deployed->deployed_by }}<br>
                             <strong>Date:</strong> {{ $deployed->date }}

@@ -7,28 +7,17 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Requestor's Name</th>
-                <th>Unit No</th>
-                <th>Items Requested</th>
-                <th>Quantity</th>
-                <th>Status</th>
-                <th>Remarks</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($acceptedTickets as $acceptedTicket)
-                <tr>
-                    <td>{{ $acceptedTicket->requestor_name }}</td>
-                    <td>{{ $acceptedTicket->unit_no }}</td>
-                    <td>{{ $acceptedTicket->items_requested }}</td>
-                    <td>{{ $acceptedTicket->quantity }}</td>
-                    <td>{{ $acceptedTicket->status }}</td>
-                    <td>{{ $acceptedTicket->remarks }}</td>
-                    <td>
+    <div class="row">
+        @forelse ($acceptedTickets as $acceptedTicket)
+            <div class="col-md-4 mb-4">
+                <div class="card border-success mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Requestor's Name: {{ $acceptedTicket->requestor_name }}</h5>
+                        <p class="card-text">Unit No: {{ $acceptedTicket->unit_no }}</p>
+                        <p class="card-text">Items Requested: {{ $acceptedTicket->items_requested }}</p>
+                        <p class="card-text">Quantity: {{ $acceptedTicket->quantity }}</p>
+                        <p class="card-text">Status: {{ $acceptedTicket->status }}</p>
+                        <p class="card-text">Remarks: {{ $acceptedTicket->remarks }}</p>
                         @if ($acceptedTicket->status !== 'Accepted')
                             <form action="{{ route('accepted_tickets.update', $acceptedTicket->id) }}" method="POST">
                                 @csrf
@@ -37,25 +26,19 @@
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         @endif
-                    </td>
-                    <td>
                         @if ($acceptedTicket->status === 'Accepted')
-                            <form action="{{ route('accepted_tickets.deploy', $acceptedTicket->id) }}" >
-                                 @csrf
-                                    <button class="btn btn-primary">View Stocks</button>
+                            <form action="{{ route('accepted_tickets.deploy', $acceptedTicket->id) }}">
+                                @csrf
+                                <button class="btn btn-primary">View Stocks</button>
                             </form>
                         @endif
-                    </td>
-
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="7">No accepted requests found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-
-
-    
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col">
+                <p>No accepted requests found.</p>
+            </div>
+        @endforelse
+    </div>
 @endsection
