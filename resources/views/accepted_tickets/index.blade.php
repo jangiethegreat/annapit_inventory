@@ -45,7 +45,7 @@
 
 <style>
     .card {
-        box-shadow: 5px 5px 3px 6px lightblue;
+        box-shadow: 5px 5px 3px 6px lightgray;
     }
 </style>
 @endsection
