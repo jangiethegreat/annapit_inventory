@@ -12,7 +12,7 @@
 <div class="row">
     @forelse ($stocks as $stock)
     <div class="col-md-4 mb-4">
-        <div class="card border-secondary mb-3">
+        <div class="card  text-center border-secondary mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ $stock->category }}</h5>
                 <p class="card-text">Quantity: {{ $stock->quantity }}</p>

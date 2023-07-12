@@ -15,7 +15,7 @@
 <div class="row">
     @forelse ($request_tickets as $request_ticket)
     <div class="col-md-4 mb-4">
-        <div class="card border-info mb-3">
+        <div class="card text-center border-info mb-3">
             <div class="card-body">
                 <h5 class="card-title">Requestor's Name: {{ $request_ticket->requestor_name }}</h5>
                 <p class="card-text">
