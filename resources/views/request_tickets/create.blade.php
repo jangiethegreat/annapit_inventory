@@ -69,7 +69,7 @@
         width: 70vh;
         height: auto;
         margin: auto;
-        box-shadow: 10px 10px 5px 12px black;
+        box-shadow: 5px 5px 3px 6px lightgray;
     }
 
     .card-header {
