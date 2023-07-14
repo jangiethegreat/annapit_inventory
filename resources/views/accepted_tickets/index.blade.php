@@ -11,7 +11,7 @@
 <div class="row">
     @forelse ($acceptedTickets as $acceptedTicket)
     <div class="col-md-4 mb-4">
-        <div class="card text-center border-success mb-3" style="max-width: 18rem;">
+        <div class="card text-center border-success mb-3">
             <div class="card-body">
                 <h5 class="card-title">Requestor's Name: {{ $acceptedTicket->requestor_name }}</h5>
                 <p class="card-text">Unit No: {{ $acceptedTicket->unit_no }}</p>

@@ -16,7 +16,7 @@
 <div class="row">
     @foreach ($deployeds as $deployed)
     <div class="col-md-4 mb-4">
-        <div class="card text-center  border-dark mb-3" style="width: 18rem;">
+        <div class="card text-center  border-dark mb-3">
             <div class="card-header bg-transparent border-dark"><strong>Requested By:</strong> {{ $deployed->requested_by }}</div>
             <div class="card-body">
                 <h5 class="card-title">{{ $deployed->item_requested }}</h5>
