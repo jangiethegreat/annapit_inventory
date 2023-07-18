@@ -19,7 +19,7 @@
             <div class="card-body">
                 <h5 class="card-title">Requestor's Name: {{ $request_ticket->requestor_name }}</h5>
                 <p class="card-text">
-                    <strong>Unit No:</strong> {{ $request_ticket->unit_no }}<br>
+                    <strong>Company/Department:</strong> {{ $request_ticket->unit_no }}<br>
                     <strong>Items Requested:</strong> {{ $request_ticket->items_requested }}<br>
                     <strong>Quantity:</strong> {{ $request_ticket->quantity }}
                 </p>

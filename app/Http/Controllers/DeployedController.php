@@ -49,7 +49,6 @@ class DeployedController extends Controller
         Cart::Truncate();
 
         return redirect()->route('deployeds.index')->with('success', 'Deployed record created successfully.');
-
     }
 
 
@@ -97,15 +96,40 @@ class DeployedController extends Controller
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
 
-        if ($deployeds->requested_by == 'Annap 2') {
-            $path = public_path() . '/logo3.png';
+        if ($deployeds->unit_no == 'ASAI') {
+            $path = public_path() . '/logo.png';
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+        } elseif ($deployeds->unit_no == 'Finance') {
+            $path = public_path() . '/Logo1.png';
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+        } elseif ($deployeds->unit_no == 'Annap 1') {
+            $path = public_path() . '/Logo2.png';
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+        } elseif ($deployeds->unit_no == 'Annap 2') {
+            $path = public_path() . '/Logo3.png';
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+        } elseif ($deployeds->unit_no == 'Annap 3') {
+            $path = public_path() . '/Logo4.png';
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+        } elseif ($deployeds->unit_no == 'Consult') {
+            $path = public_path() . '/Logo5.png';
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+        } elseif ($deployeds->unit_no == 'Marketing') {
+            $path = public_path() . '/Logo6.png';
+            $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
         }
 
         $image = 'data:image/' . $type . ';base64,' . base64_encode($data);
         $currentDate = Carbon::now()->format('Y/m/d');
 
-        $fileName = $deployeds->requested_by . '-Request-form-' . $currentDate . '.pdf';
+        $fileName = $deployeds->unit_no . '-Request-form-' . $currentDate . '.pdf';
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::setOptions(['isHTML5ParserEnabled' => true, 'isRemoteEnabled' => true])
             ->loadView('pdf\deployed-item', compact('deployeds', 'currentDate', 'image'));
@@ -218,5 +242,36 @@ class DeployedController extends Controller
         // Download the PDF file
         $dompdf->stream($fileName, ['Attachment' => true]);
     }
+    public function generateSticker()
+    {
+        // Create new Dompdf instance
+        $dompdf = new Dompdf();
 
+        // Generate the HTML content for the sticker
+        $html = '<div style="
+        width: 200px;
+        height: 100px;
+        background-color: yellow;
+        border: 2px solid black;
+        padding: 10px;
+        text-align: center;
+        overflow: hidden; /* Prevents content overflow */
+        word-wrap: break-word; /* Wraps long words */
+    ">
+        <h1 style="margin: 0;">Sticker Content</h1>
+        <p style="margin: 0;">This is a sticker that will be printed in the PDF.</p>
+    </div>';
+
+        // Load HTML content
+        $dompdf->loadHtml($html);
+
+        // Set paper size and orientation (optional)
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Output the generated PDF to the browser
+        $dompdf->stream('document.pdf');
+    }
 }

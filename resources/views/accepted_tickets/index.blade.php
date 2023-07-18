@@ -14,7 +14,7 @@
         <div class="card text-center border-success mb-3">
             <div class="card-body">
                 <h5 class="card-title">Requestor's Name: {{ $acceptedTicket->requestor_name }}</h5>
-                <p class="card-text">Unit No: {{ $acceptedTicket->unit_no }}</p>
+                <p class="card-text">Company/Department: {{ $acceptedTicket->unit_no }}</p>
                 <p class="card-text">Items Requested: {{ $acceptedTicket->items_requested }}</p>
                 <p class="card-text">Quantity: {{ $acceptedTicket->quantity }}</p>
                 <p class="card-text">Status: {{ $acceptedTicket->status }}</p>

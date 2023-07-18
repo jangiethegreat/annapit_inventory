@@ -46,3 +46,4 @@ Route::get('/cart/clear', [StockController::class, 'clearCart'])->name('cart.cle
 Route::resource('deployeds', DeployedController::class);
 Route::get('/deployeds/{id}/download-pdf', [DeployedController::class, 'downloadPdf'])->name('deployeds.downloadPdf');
 Route::get('/deployed-items/download-reports', [DeployedController::class, 'downloadReports'])->name('deployedItems.downloadReports');
+Route::get('/generate-sticker', [DeployedController::class, 'generateSticker'])->name('deployeds.generateSticker');

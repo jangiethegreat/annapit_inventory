@@ -24,8 +24,16 @@
                 <input type="text" name="requestor_name" id="requestor_name" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="unit_no">Unit No:</label>
-                <input type="text" name="unit_no" id="unit_no" class="form-control" required>
+                <label for="unit_no">Company/Department :</label>
+                <select name="unit_no" id="unit_no" class="form-control" required>
+                    <option value="ASAI">ASAI</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Annap 1">Annap 1</option>
+                    <option value="Annap 2">Annap 2</option>
+                    <option value="Annap 3">Annap 3</option>
+                    <option value="Consult">Consult</option>
+                    <option value="Marketing">Marketing</option>
+                </select>
             </div>
 
             <div id="items-container">

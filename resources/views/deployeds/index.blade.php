@@ -21,7 +21,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $deployed->item_requested }}</h5>
                 <p class="card-text">
-                    <strong>Unit No:</strong>{{ $deployed->unit_no }}<br>
+                    <strong>Company/Department:</strong>{{ $deployed->unit_no }}<br>
                     <strong>Quantity:</strong> {{ $deployed->quantity }}<br>
                     <strong>Deployed By:</strong> {{ $deployed->deployed_by }}<br>
                     <strong>Date:</strong> {{ $deployed->date }}
@@ -31,6 +31,7 @@
                 <a href="{{ route('deployeds.downloadPdf', ['id' => $deployed->id]) }}" class="btn btn-danger">
                     <i class="fa fa-file-pdf-o"></i> Download PDF
                 </a>
+
             </div>
         </div>
     </div>
