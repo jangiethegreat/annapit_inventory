@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -15,6 +16,8 @@ return new class extends Migration {
             $table->string('category');
             $table->integer('quantity');
             $table->text('details')->nullable();
+            $table->date('date_purchased')->nullable();
+            $table->text('status')->nullable();
         });
     }
 

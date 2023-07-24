@@ -12,12 +12,35 @@ use Illuminate\Http\Request;
 
 class StockController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $stocks = Stock::with('category')->get();
+        $showAll = $request->query('show_all', false); // Check if the 'show_all' query parameter is present
 
-        return view('stocks.index', compact('stocks'));
+        // Query the stocks based on the 'showAll' value
+        $stocksQuery = $showAll ? Stock::query() : Stock::where('quantity', '>', 0);
+
+        // Check if a category filter is applied
+        if ($request->has('category')) {
+            $categoryFilter = $request->input('category');
+
+            // If the category filter is not "all", apply the category filter
+            if ($categoryFilter !== 'all') {
+                $stocksQuery->where('category', $categoryFilter);
+            }
+        }
+
+        // Retrieve the stocks with their category information
+        $stocks = $stocksQuery->get();
+
+        // Get all categories for the category filter dropdown
+        $categories = Category::all();
+
+        return view('stocks.index', compact('stocks', 'showAll', 'categories', 'categoryFilter'));
     }
+
+
+
+
 
     public function create()
     {
@@ -31,7 +54,13 @@ class StockController extends Controller
             'category' => 'required',
             'quantity' => 'required|numeric',
             'details' => 'nullable',
+            'date_purchased' => 'nullable|date',
+            'status' => 'nullable|in:brandnew,used',
         ]);
+
+        // Retrieve the status and date_purchased data
+        $status = $request->input('status');
+        $datePurchased = $request->input('date_purchased');
 
         // Retrieve the selected category ID from the request
         $categoryId = $validatedData['category'];
@@ -40,15 +69,18 @@ class StockController extends Controller
         $category = Category::findOrFail($categoryId);
         $categoryName = $category->name;
 
-        // Create the stock with the selected category name
+        // Create the stock with the selected category name, status, and date_purchased
         $stock = new Stock();
         $stock->category = $categoryName;
         $stock->quantity = $validatedData['quantity'];
         $stock->details = $validatedData['details'];
+        $stock->date_purchased = $datePurchased; // Set the date_purchased value
+        $stock->status = $status; // Set the status value
         $stock->save();
 
         return redirect()->route('stocks.index')->with('success', 'Stock created successfully.');
     }
+
 
     public function edit($id)
     {
@@ -63,6 +95,8 @@ class StockController extends Controller
             'category' => 'required',
             'quantity' => 'required|numeric',
             'details' => 'nullable',
+            'date_purchased' => 'nullable|date',
+            'status' => 'nullable|in:brandnew,used',
         ]);
 
         $stock = Stock::findOrFail($id);
@@ -77,6 +111,14 @@ class StockController extends Controller
         $existingQuantity = $stock->quantity;
         $newQuantity = $existingQuantity + $request->input('quantity', 0);
         $validatedData['quantity'] = $newQuantity;
+
+        // Retrieve the status and date_purchased data
+        $status = $request->input('status');
+        $datePurchased = $request->input('date_purchased');
+
+        // Set the status and date_purchased values
+        $stock->date_purchased = $datePurchased;
+        $stock->status = $status;
 
         $stock->update($validatedData);
 
@@ -161,10 +203,4 @@ class StockController extends Controller
 
         return Redirect::back()->with('success', 'Cart cleared successfully. Quantity returned to stock.');
     }
-
-
-
-
-
-
 }

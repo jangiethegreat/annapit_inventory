@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model
 {
     use HasFactory;
-    protected $fillable = ['category', 'quantity', 'details'];
+    protected $fillable = ['category_id', 'quantity', 'details', 'date_purchased', 'status'];
     public $timestamps = false;
 
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-
-
 }

@@ -105,7 +105,7 @@ class DeployedController extends Controller
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
         } elseif ($deployeds->unit_no == 'Annap 1') {
-            $path = public_path() . '/Logo2.png';
+            $path = public_path() . '/Logo2.jpg';
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
         } elseif ($deployeds->unit_no == 'Annap 2') {

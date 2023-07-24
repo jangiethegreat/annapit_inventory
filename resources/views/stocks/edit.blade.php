@@ -28,6 +28,17 @@
         <label for="details">Details:</label>
         <textarea name="details" id="details" class="form-control">{{ $stock->details }}</textarea>
     </div>
+    <div class="form-group">
+        <label for="date_purchased">Date Purchased:</label>
+        <input type="date" name="date_purchased" id="date_purchased" class="form-control" value="{{ $stock->date_purchased }}" required>
+    </div>
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <select name="status" id="status" class="form-control" required>
+            <option value="brandnew" @if($stock->status == 'brandnew') selected @endif>Brand New</option>
+            <option value="used" @if($stock->status == 'used') selected @endif>Used</option>
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary">Update</button>
     <a href="{{ route('stocks.index') }}" class="btn btn-secondary">Back</a>
 </form>

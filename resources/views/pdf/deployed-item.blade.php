@@ -119,7 +119,8 @@
             <div class="LogoGoesHere">
                 <img src="<?php echo $image ?>" width="180px" height="40px" alt="image">
             </div>
-            <p style="margin: 0; font-size: 12px; display: block;">Serial Number:{{ $currentDate }}</p>
+            <p style="margin: 0; font-size: 12px; display: block;">Serial Number: {{ $deployeds->unit_no . now()->format('Ymd') }}</p>
+
             <p style="margin: 0; font-size: 12px; display: block;">Date Purchased:</p>
             <p style="margin: 0; font-size: 12px; display: block;">Date Deployed: {{ $currentDate }} </p>
             <p style="margin: 0; font-size: 12px; display: block;">Deployed to: {{ $deployeds->requested_by }}</p>
