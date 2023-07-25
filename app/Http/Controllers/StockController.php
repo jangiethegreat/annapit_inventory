@@ -19,6 +19,9 @@ class StockController extends Controller
         // Query the stocks based on the 'showAll' value
         $stocksQuery = $showAll ? Stock::query() : Stock::where('quantity', '>', 0);
 
+        // Define the $categoryFilter variable with a default value of 'all'
+        $categoryFilter = 'all';
+
         // Check if a category filter is applied
         if ($request->has('category')) {
             $categoryFilter = $request->input('category');
@@ -37,6 +40,7 @@ class StockController extends Controller
 
         return view('stocks.index', compact('stocks', 'showAll', 'categories', 'categoryFilter'));
     }
+
 
 
 
