@@ -8,6 +8,7 @@ use App\Models\Stock;
 
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Session;
 
 class AcceptedTicketController extends Controller
 {
@@ -78,6 +79,8 @@ class AcceptedTicketController extends Controller
             'status' => 'Accepted',
             'remarks' => 'Ready For Deployment'
         ]);
+        \Illuminate\Support\Facades\Session::put('deploy_button_clicked', true);
+
 
         return redirect()->route('accepted_tickets.index')->with('success', 'Accepted request status updated.');
     }
@@ -99,6 +102,4 @@ class AcceptedTicketController extends Controller
 
         return view('accepted_tickets.deploy', compact('acceptedTicket', 'stocks'));
     }
-
-
 }

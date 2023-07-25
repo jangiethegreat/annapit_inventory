@@ -10,11 +10,12 @@
 <p><strong>Quantity:</strong> {{ $acceptedTicket->quantity }}</p>
 <p><strong>Status:</strong> {{ $acceptedTicket->status }}</p>
 <p><strong>Remarks:</strong> {{ $acceptedTicket->remarks }}</p>
+@if (Session::get('item_added_to_cart'))
 <a href="{{ route('deployeds.create') }}"><button type="button" class="btn btn-success"><i class="fa fa-share-square" aria-hidden="true"></i> Deploy</button></a>
-
 @php
-session(['acceptedTicket' => $acceptedTicket]);
+Session::forget('item_added_to_cart');
 @endphp
+@endif
 
 @if (session('success'))
 <div class="alert alert-success">{{ session('success') }}</div>
@@ -32,6 +33,7 @@ session(['acceptedTicket' => $acceptedTicket]);
     </thead>
     <tbody>
         @forelse ($stocks as $stock)
+        @if ($stock->quantity > 1)
         <tr>
             <td>{{ $stock->category }}</td>
             <td>{{ $stock->quantity }}</td>
@@ -46,6 +48,7 @@ session(['acceptedTicket' => $acceptedTicket]);
                 </form>
             </td>
         </tr>
+        @endif
         @empty
         <tr>
             <td colspan="3">No stocks available for the requested category.</td>

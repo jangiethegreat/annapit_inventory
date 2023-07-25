@@ -48,6 +48,7 @@ class DeployedController extends Controller
         Deployed::create($validatedData);
         Cart::Truncate();
 
+
         return redirect()->route('deployeds.index')->with('success', 'Deployed record created successfully.');
     }
 

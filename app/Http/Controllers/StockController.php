@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\AcceptedTicket;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -175,6 +176,9 @@ class StockController extends Controller
 
         // Decrease the stock quantity
         $stock->decrement('quantity', $quantity);
+
+        // Set the session flag to indicate that an item has been added to the cart
+        Session::put('item_added_to_cart', true);
 
         return Redirect::back()->with('success', 'Item added to cart successfully.');
     }
